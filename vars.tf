@@ -25,7 +25,7 @@ variable "transit_gateway_routes" {
   }))
 }
 
-variable "default_propagation_route_table" {
+variable "propagation_route_table" {
   description = "Boolean Propagation Route Table"
   type        = bool
   default     = false
