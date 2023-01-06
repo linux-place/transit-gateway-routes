@@ -28,3 +28,9 @@ resource "aws_ec2_transit_gateway_route" "route" {
   transit_gateway_attachment_id  = tobool(lookup(var.transit_gateway_routes[count.index], "blackhole", false)) == false ? lookup(var.transit_gateway_routes[count.index], "attachment_id") : null
 }
 
+resource "aws_ec2_transit_gateway_route_table_propagation" "propagation" {
+  count = length(var.transit_gateway_attachment_id)
+
+  transit_gateway_attachment_id  = var.propagation_route_table == true ? var.transit_gateway_attachment_id[count.index] : null
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.route_table.id
+}
