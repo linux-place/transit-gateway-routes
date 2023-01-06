@@ -24,3 +24,9 @@ variable "transit_gateway_routes" {
     destination_cidr_block = string
   }))
 }
+
+variable "default_propagation_route_table" {
+  description = "Boolean Propagation Route Table"
+  type        = bool
+  default     = false
+}
