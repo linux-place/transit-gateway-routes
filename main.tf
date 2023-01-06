@@ -28,8 +28,9 @@ resource "aws_ec2_transit_gateway_route" "route" {
 }
 
 resource "aws_ec2_transit_gateway_route_table_propagation" "propagation" {
-  count = length(var.transit_gateway_attachment_id)
+  count = var.propagation_route_table ? 1 : 0
+  ids   = length(var.transit_gateway_attachment_id)
 
-  transit_gateway_attachment_id  = var.propagation_route_table == true ? var.transit_gateway_attachment_id[count.index] : null
+  transit_gateway_attachment_id  = var.transit_gateway_attachment_id[ids.index]
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.route_table.id
 }
